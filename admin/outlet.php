@@ -4,6 +4,7 @@ $host = 'localhost';
 $user = 'root';
 $password = '';
 $db_name = 'laundry_db';
+include("../css/sidebar.php");
 
 $conn = new mysqli($host, $user, $password, $db_name);
 if ($conn->connect_error) {
@@ -72,20 +73,33 @@ $outlets = readOutlets($conn);
 ?>
 
 <!-- HTML form for creating or updating outlets -->
-<h2>Outlet Form</h2>
-<form method="post" action="">
-    <input type="hidden" name="id" value="<?php if (isset($_GET['edit'])) { echo $_GET['edit']; } ?>">
-    Name: <input type="text" name="nama" value="<?php if (isset($_GET['edit'])) { echo getOutlet($conn, $_GET['edit'])['nama']; } ?>" required><br>
-    Address: <input type="text" name="alamat" value="<?php if (isset($_GET['edit'])) { echo getOutlet($conn, $_GET['edit'])['alamat']; } ?>" required><br>
-    Phone: <input type="text" name="tlp" value="<?php if (isset($_GET['edit'])) { echo getOutlet($conn, $_GET['edit'])['tlp']; } ?>" required><br>
-    <?php if (isset($_GET['edit'])): ?>
-        <input type="submit" name="update" value="Update Outlet">
-        <a href="outlet.php"><button type="button">Clear</button></a> <!-- Clear button -->
-    <?php else: ?>
-        <input type="submit" name="create" value="Add Outlet">
-        <a href="outlet.php"><button type="button">Clear</button></a> <!-- Clear button -->
-    <?php endif; ?>
-</form>
+<head>
+    <link rel="stylesheet" href="../css/outlet.css"> <!-- Link to CSS file -->
+</head>
+<body>
+<h2>Outlet List</h2>
+
+<!-- Add Outlet Button -->
+<div class="action-buttons">
+    <button id="show-form-btn" class="add-outlet-btn">Tambah Outlet</button>
+</div>
+
+<!-- Hidden Outlet Form -->
+<div id="outlet-form" class="outlet-form" style="display: none;">
+    <form method="post" action="">
+        <input type="hidden" name="id" value="<?php if (isset($_GET['edit'])) { echo $_GET['edit']; } ?>">
+        Name: <input type="text" name="nama" value="<?php if (isset($_GET['edit'])) { echo getOutlet($conn, $_GET['edit'])['nama']; } ?>" required><br>
+        Address: <input type="text" name="alamat" value="<?php if (isset($_GET['edit'])) { echo getOutlet($conn, $_GET['edit'])['alamat']; } ?>" required><br>
+        Phone: <input type="text" name="tlp" value="<?php if (isset($_GET['edit'])) { echo getOutlet($conn, $_GET['edit'])['tlp']; } ?>" required><br>
+        <?php if (isset($_GET['edit'])): ?>
+            <input type="submit" name="update" value="Update Outlet">
+            <a href="outlet.php"><button type="button">Clear</button></a> <!-- Clear button -->
+        <?php else: ?>
+            <input type="submit" name="create" value="Add Outlet">
+            <a href="outlet.php"><button type="button">Clear</button></a> <!-- Clear button -->
+        <?php endif; ?>
+    </form>
+</div>
 
 <!-- Display list of outlets -->
 <h2>Outlet List</h2>
@@ -110,3 +124,15 @@ $outlets = readOutlets($conn);
     </tr>
     <?php endwhile; ?>
 </table>
+
+<script>
+    document.getElementById('show-form-btn').addEventListener('click', function() {
+        var form = document.getElementById('outlet-form');
+        if (form.style.display === 'none') {
+            form.style.display = 'block';
+        } else {
+            form.style.display = 'none';
+        }
+    });
+</script>
+</body>

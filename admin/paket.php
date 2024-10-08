@@ -1,43 +1,43 @@
 <?php
 include "../conn.php";
+include("../css/sidebar.php");
 
-// Function to create a package
 function createPaket($conn, $id_outlet, $jenis, $nama_paket, $harga) {
     $sql = "INSERT INTO tb_paket (id_outlet, jenis, nama_paket, harga) VALUES ('$id_outlet', '$jenis', '$nama_paket', '$harga')";
     return $conn->query($sql);
 }
 
-// Function to read all packages
+
 function readPakets($conn) {
     $sql = "SELECT tb_paket.*, tb_outlet.nama AS outlet_name FROM tb_paket JOIN tb_outlet ON tb_paket.id_outlet = tb_outlet.id";
     return $conn->query($sql);
 }
 
-// Function to get a single package's details
+
 function getPaket($conn, $id) {
     $sql = "SELECT * FROM tb_paket WHERE id = '$id'";
     return $conn->query($sql)->fetch_assoc();
 }
 
-// Function to update a package
+
 function updatePaket($conn, $id, $id_outlet, $jenis, $nama_paket, $harga) {
     $sql = "UPDATE tb_paket SET id_outlet = '$id_outlet', jenis = '$jenis', nama_paket = '$nama_paket', harga = '$harga' WHERE id = '$id'";
     return $conn->query($sql);
 }
 
-// Function to delete a package
+
 function deletePaket($conn, $id) {
     $sql = "DELETE FROM tb_paket WHERE id = '$id'";
     return $conn->query($sql);
 }
 
-// Function to get the list of outlets (for the dropdown)
+
 function getOutlets($conn) {
     $sql = "SELECT id, nama FROM tb_outlet";
     return $conn->query($sql);
 }
 
-// Handle Create, Update, Delete operations based on form submission
+
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     if (isset($_POST['create'])) {
         $id_outlet = $_POST['id_outlet'];
@@ -66,45 +66,57 @@ if (isset($_GET['delete'])) {
     }
 }
 
-// Display all packages (Read)
 $pakets = readPakets($conn);
 $outlets = getOutlets($conn); // Fetching outlets for the dropdown
 ?>
 
-<!-- HTML form for creating or updating packages -->
-<h2>Package Form</h2>
-<form method="post" action="">
-    <input type="hidden" name="id" value="<?php if (isset($_GET['edit'])) { echo $_GET['edit']; } ?>">
-    
-    Outlet:
-    <select name="id_outlet" required>
-        <?php while ($outlet = $outlets->fetch_assoc()): ?>
-            <option value="<?php echo $outlet['id']; ?>" 
-                <?php if (isset($_GET['edit']) && getPaket($conn, $_GET['edit'])['id_outlet'] == $outlet['id']) echo 'selected'; ?>>
-                <?php echo $outlet['nama']; ?>
-            </option>
-        <?php endwhile; ?>
-    </select><br>
-    
-    Type: 
-    <select name="jenis" required>
-        <option value="kiloan" <?php if (isset($_GET['edit']) && getPaket($conn, $_GET['edit'])['jenis'] == 'kiloan') echo 'selected'; ?>>Kiloan</option>
-        <option value="selimut" <?php if (isset($_GET['edit']) && getPaket($conn, $_GET['edit'])['jenis'] == 'selimut') echo 'selected'; ?>>Selimut</option>
-        <option value="bed_cover" <?php if (isset($_GET['edit']) && getPaket($conn, $_GET['edit'])['jenis'] == 'bed_cover') echo 'selected'; ?>>Bed Cover</option>
-        <option value="kaos" <?php if (isset($_GET['edit']) && getPaket($conn, $_GET['edit'])['jenis'] == 'kaos') echo 'selected'; ?>>Kaos</option>
-    </select><br>
-    
-    Package Name: <input type="text" name="nama_paket" value="<?php if (isset($_GET['edit'])) { echo getPaket($conn, $_GET['edit'])['nama_paket']; } ?>" required><br>
-    Price: <input type="text" name="harga" value="<?php if (isset($_GET['edit'])) { echo getPaket($conn, $_GET['edit'])['harga']; } ?>" required><br>
-    
-    <?php if (isset($_GET['edit'])): ?>
-        <input type="submit" name="update" value="Update Package">
-        <a href="paket.php"><button type="button">Clear</button></a> <!-- Clear button -->
-    <?php else: ?>
-        <input type="submit" name="create" value="Add Package">
-        <a href="paket.php"><button type="button">Clear</button></a> <!-- Clear button -->
-    <?php endif; ?>
-</form>
+
+<head>
+    <link rel="stylesheet" href="../css/paket.css"> 
+</head>
+<body>
+<h2>Package List</h2>
+
+
+<div class="action-buttons">
+    <button id="show-form-btn" class="add-package-btn">Tambah Paket</button>
+</div>
+
+
+<div id="package-form" class="package-form" style="display: none;">
+    <form method="post" action="">
+        <input type="hidden" name="id" value="<?php if (isset($_GET['edit'])) { echo $_GET['edit']; } ?>">
+        
+        Outlet:
+        <select name="id_outlet" required>
+            <?php while ($outlet = $outlets->fetch_assoc()): ?>
+                <option value="<?php echo $outlet['id']; ?>" 
+                    <?php if (isset($_GET['edit']) && getPaket($conn, $_GET['edit'])['id_outlet'] == $outlet['id']) echo 'selected'; ?>>
+                    <?php echo $outlet['nama']; ?>
+                </option>
+            <?php endwhile; ?>
+        </select><br>
+        
+        Type: 
+        <select name="jenis" required>
+            <option value="kiloan" <?php if (isset($_GET['edit']) && getPaket($conn, $_GET['edit'])['jenis'] == 'kiloan') echo 'selected'; ?>>Kiloan</option>
+            <option value="selimut" <?php if (isset($_GET['edit']) && getPaket($conn, $_GET['edit'])['jenis'] == 'selimut') echo 'selected'; ?>>Selimut</option>
+            <option value="bed_cover" <?php if (isset($_GET['edit']) && getPaket($conn, $_GET['edit'])['jenis'] == 'bed_cover') echo 'selected'; ?>>Bed Cover</option>
+            <option value="kaos" <?php if (isset($_GET['edit']) && getPaket($conn, $_GET['edit'])['jenis'] == 'kaos') echo 'selected'; ?>>Kaos</option>
+        </select><br>
+        
+        Package Name: <input type="text" name="nama_paket" value="<?php if (isset($_GET['edit'])) { echo getPaket($conn, $_GET['edit'])['nama_paket']; } ?>" required><br>
+        Price: <input type="text" name="harga" value="<?php if (isset($_GET['edit'])) { echo getPaket($conn, $_GET['edit'])['harga']; } ?>" required><br>
+        
+        <?php if (isset($_GET['edit'])): ?>
+            <input type="submit" name="update" value="Update Package">
+            <a href="paket.php"><button type="button">Clear</button></a> <!-- Clear button -->
+        <?php else: ?>
+            <input type="submit" name="create" value="Add Package">
+            <a href="paket.php"><button type="button">Clear</button></a> <!-- Clear button -->
+        <?php endif; ?>
+    </form>
+</div>
 
 <!-- Display list of packages -->
 <h2>Package List</h2>
@@ -131,3 +143,15 @@ $outlets = getOutlets($conn); // Fetching outlets for the dropdown
     </tr>
     <?php endwhile; ?>
 </table>
+
+<script>
+    document.getElementById('show-form-btn').addEventListener('click', function() {
+        var form = document.getElementById('package-form');
+        if (form.style.display === 'none') {
+            form.style.display = 'block';
+        } else {
+            form.style.display = 'none';
+        }
+    });
+</script>
+</body>

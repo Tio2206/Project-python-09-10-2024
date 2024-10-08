@@ -62,11 +62,11 @@ $members = readMembers($conn);
     <link rel="stylesheet" href="../css/member.css">
 </head>
 <body>
-<h2>Data Member</h2>
+<h2>Data Pelanggan</h2>
 
 <!-- Tambah Member Button -->
 <div class="action-buttons">
-    <button id="show-form-btn" class="add-member-btn">Tambah Member</button>
+    <button id="show-form-btn" class="add-member-btn">Tambah Pelanggan</button>
 </div>
 
 <!-- Hidden Member Form -->
@@ -91,7 +91,7 @@ $members = readMembers($conn);
     </form>
 </div>
 
-<h2>List Daftar Member</h2>
+<h2>List Daftar Pengguna</h2>
 <table border="1">
     <tr>
         <th>ID</th>

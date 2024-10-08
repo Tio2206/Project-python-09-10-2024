@@ -1,0 +1,141 @@
+/* General reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Roboto', Arial, sans-serif;
+}
+
+/* Styling for the body */
+body {
+    background-color: #f4f7fc;
+    color: #333;
+    padding: 20px;
+    margin-left: 270px;
+}
+
+/* Container for buttons */
+.action-buttons {
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 20px;
+}
+
+.add-package-btn {
+    background-color: #2a9d8f;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    border: none;
+    font-size: 16px;
+}
+
+.add-package-btn:hover {
+    background-color: #21867a;
+}
+
+/* Form styling */
+.package-form {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+}
+
+/* Table styling */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+th, td {
+    padding: 12px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+th {
+    background-color: #264653;
+    color: white;
+}
+
+tr:hover {
+    background-color: #f1f1f1;
+}
+
+/* General styles for the form */
+.package-form {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+}
+
+/* Style for the input fields and select */
+.package-form input[type="text"],
+.package-form select {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    transition: border-color 0.3s ease;
+}
+
+/* Style for input focus */
+.package-form input[type="text"]:focus,
+.package-form select:focus {
+    border-color: #2a9d8f; /* Highlight color on focus */
+    outline: none; /* Remove default outline */
+}
+
+/* Style for buttons */
+.package-form input[type="submit"],
+.package-form button {
+    background-color: #2a9d8f;
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    font-size: 16px;
+}
+
+/* Button hover effect */
+.package-form input[type="submit"]:hover,
+.package-form button:hover {
+    background-color: #21867a; /* Darker shade on hover */
+}
+
+/* Clear button */
+.package-form .clear-btn {
+    background-color: #f44336; /* Red background for clear button */
+}
+
+.package-form .clear-btn:hover {
+    background-color: #c62828; /* Darker shade on hover */
+}
+
+/* Responsiveness */
+@media (max-width: 600px) {
+    .package-form {
+        padding: 15px; /* Less padding on small screens */
+    }
+
+    .package-form input[type="text"],
+    .package-form select {
+        font-size: 14px; /* Smaller font size */
+    }
+
+    .package-form input[type="submit"],
+    .package-form button {
+        font-size: 14px; /* Smaller font size for buttons */
+    }
+}
+
