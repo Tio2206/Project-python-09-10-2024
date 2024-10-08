@@ -4,7 +4,7 @@ session_start();
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $username = mysqli_real_escape_string($conn, $_POST['username']);
-    $password = $_POST['password']; // No hashing, using plain text comparison
+    $password = $_POST['password']; 
 
     $query = "SELECT * FROM tb_user WHERE username = ? AND password = ?";
     $stmt = mysqli_prepare($conn, $query);
@@ -21,7 +21,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $_SESSION['outlet_id'] = $data['id_outlet'];
         $_SESSION['role'] = $data['role'];
 
-        session_regenerate_id(true); // Prevent session fixation
+        session_regenerate_id(true); 
 
         if ($data['role'] == 'admin') {
             header('Location: admin/');
@@ -32,8 +32,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         }
         exit;
     } else {
-        // Invalid login credentials
-        echo "<script>alert('Username or password incorrect');window.location.href = 'index.php';</script>";
+        echo "<script>alert('Username atau password salah');window.location.href = 'index.php';</script>";
     }
 }
 ?>
