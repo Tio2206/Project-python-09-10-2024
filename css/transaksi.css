@@ -1,0 +1,107 @@
+/* General reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Roboto', Arial, sans-serif;
+}
+
+/* Styling for the body */
+body {
+    background-color: #f4f7fc;
+    color: #333;
+    padding: 20px;
+    margin-left: 270px; /* Adjust according to your layout */
+}
+
+/* Container for buttons */
+.action-buttons {
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 20px;
+}
+
+/* Button styles */
+button, input[type="submit"] {
+    background-color: #2a9d8f;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    border: none;
+    font-size: 16px;
+}
+
+button:hover, input[type="submit"]:hover {
+    background-color: #21867a;
+}
+
+/* Form styling */
+form {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+}
+
+/* Input fields and select styling */
+input[type="text"],
+input[type="number"],
+select {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    transition: border-color 0.3s ease;
+}
+
+/* Input focus effect */
+input[type="text"]:focus,
+input[type="number"]:focus,
+select:focus {
+    border-color: #2a9d8f; /* Highlight color on focus */
+    outline: none; /* Remove default outline */
+}
+
+/* Table styling */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+th, td {
+    padding: 12px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+th {
+    background-color: #264653;
+    color: white;
+}
+
+tr:hover {
+    background-color: #f1f1f1;
+}
+
+/* Responsive styling */
+@media (max-width: 600px) {
+    form {
+        padding: 15px; /* Less padding on small screens */
+    }
+
+    input[type="text"],
+    input[type="number"],
+    select {
+        font-size: 14px; /* Smaller font size */
+    }
+
+    button,
+    input[type="submit"] {
+        font-size: 14px; /* Smaller font size for buttons */
+    }
+}

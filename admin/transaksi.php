@@ -3,7 +3,7 @@
 session_start();
 
 include "../conn.php";
-
+include "../css/sidebar.php";
 // Insert New Transaction
 if (isset($_POST['submit'])) {
     $id_outlet = $_POST['id_outlet'];
@@ -73,6 +73,7 @@ if (isset($_POST['delete'])) {
 <html>
 <head>
     <title>Transaction Management</title>
+    <link rel="stylesheet" href="../css/transaksi.css">
 </head>
 <body>
 

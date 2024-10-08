@@ -83,15 +83,15 @@ $members = readMembers($conn);
         Nomor Telphone: <input type="text" name="tlp" value="<?php if (isset($_GET['edit'])) { echo getMember($conn, $_GET['edit'])['tlp']; } ?>" required><br>
         <?php if (isset($_GET['edit'])): ?>
             <input type="submit" name="update" value="Update Member" class="reset">
-            <a href="member.php"><button type="button">Reset</button></a> <!-- Clear button -->
+            <a href="member.php"><button type="button">Reset</button></a> 
         <?php else: ?>
             <input type="submit" name="create" value="Add Member" class="reset">
-            <a href="member.php"><button type="button">Reset</button></a> <!-- Clear button -->
+            <a href="member.php"><button type="button">Reset</button></a> 
         <?php endif; ?>
     </form>
 </div>
 
-<h2>List Daftar Pengguna</h2>
+<h2>List Daftar Pelanggan</h2>
 <table border="1">
     <tr>
         <th>ID</th>

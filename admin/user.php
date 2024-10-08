@@ -2,25 +2,25 @@
 include "../conn.php";
 include("../css/sidebar.php");
 
-// Function to create a user
+
 function createUser($conn, $id_outlet, $nama, $username, $password, $role) {
     $sql = "INSERT INTO tb_user (id_outlet, nama, username, password, role) VALUES ('$id_outlet', '$nama', '$username', '$password', '$role')";
     return $conn->query($sql);
 }
 
-// Function to read all users
+
 function readUsers($conn) {
     $sql = "SELECT tb_user.*, tb_outlet.nama AS outlet_name FROM tb_user JOIN tb_outlet ON tb_user.id_outlet = tb_outlet.id";
     return $conn->query($sql);
 }
 
-// Function to get a single user's details
+
 function getUser($conn, $id) {
     $sql = "SELECT * FROM tb_user WHERE id = '$id'";
     return $conn->query($sql)->fetch_assoc();
 }
 
-// Function to update a user
+
 function updateUser($conn, $id, $id_outlet, $nama, $username, $role, $password = null) {
     if ($password) {
         $sql = "UPDATE tb_user SET id_outlet = '$id_outlet', nama = '$nama', username = '$username', password = '$password', role = '$role' WHERE id = '$id'";
@@ -30,19 +30,19 @@ function updateUser($conn, $id, $id_outlet, $nama, $username, $role, $password =
     return $conn->query($sql);
 }
 
-// Function to delete a user
+
 function deleteUser($conn, $id) {
     $sql = "DELETE FROM tb_user WHERE id = '$id'";
     return $conn->query($sql);
 }
 
-// Function to get the list of outlets (for the dropdown)
+
 function getOutlets($conn) {
     $sql = "SELECT id, nama FROM tb_outlet";
     return $conn->query($sql);
 }
 
-// Handle Create, Update, Delete operations based on form submission
+
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     if (isset($_POST['create'])) {
         $id_outlet = $_POST['id_outlet'];
@@ -73,9 +73,9 @@ if (isset($_GET['delete'])) {
     }
 }
 
-// Display all users (Read)
+
 $users = readUsers($conn);
-$outlets = getOutlets($conn); // Fetching outlets for the dropdown
+$outlets = getOutlets($conn); 
 ?>
 
 <head>
@@ -116,10 +116,10 @@ $outlets = getOutlets($conn); // Fetching outlets for the dropdown
         
         <?php if (isset($_GET['edit'])): ?>
             <input type="submit" name="update" value="Update User">
-            <a href="user.php"><button type="button">Clear</button></a> <!-- Clear button -->
+            <a href="user.php"><button type="button">Clear</button></a> 
         <?php else: ?>
             <input type="submit" name="create" value="Add User">
-            <a href="user.php"><button type="button">Clear</button></a> <!-- Clear button -->
+            <a href="user.php"><button type="button">Clear</button></a> 
         <?php endif; ?>
     </form>
 </div>

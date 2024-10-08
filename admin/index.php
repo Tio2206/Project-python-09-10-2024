@@ -7,13 +7,13 @@ if (!isset($_SESSION['user_id']) || $_SESSION['role'] !== 'admin') {
     exit;
 }
 
-// Placeholder values for demonstration. Replace these with your database queries to get actual counts.
-$total_users = 120; // Example total users
-$total_outlets = 15; // Example total outlets
-$total_packages = 25; // Example total packages
 
-$username = $_SESSION['username']; // Assume username is stored in session
-$role = ucfirst($_SESSION['role']); // Capitalize the first letter of the role
+$total_users = 3; 
+$total_outlets = 10; 
+$total_packages = 25; 
+
+$username = $_SESSION['username']; 
+$role = ucfirst($_SESSION['role']); 
 ?>
 
 <!DOCTYPE html>
@@ -24,9 +24,8 @@ $role = ucfirst($_SESSION['role']); // Capitalize the first letter of the role
     <title>Admin Dashboard</title>
     <link rel="stylesheet" href="styles.css">
     <style>
-        /* Main content style */
         .main-content {
-            margin-left: 250px; /* to avoid sidebar overlap */
+            margin-left: 250px; 
             padding: 20px;
         }
 
@@ -62,18 +61,22 @@ $role = ucfirst($_SESSION['role']); // Capitalize the first letter of the role
             margin: 0;
         }
 
+        .card:hover{
+            
+        }
+
     </style>
 </head>
 <body>
-    <!-- Sidebar will be included here -->
+    
     
     <div class="main-content">
-        <!-- Welcome message -->
+       
         <div class="welcome-message">
             Selamat datang, <?php echo $username; ?>! Anda login sebagai <?php echo $role; ?>.
         </div>
 
-        <!-- Cards Section -->
+        
         <div class="cards">
             <div class="card">
                 <h3>Jumlah Pengguna</h3>
