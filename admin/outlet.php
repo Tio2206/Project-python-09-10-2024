@@ -80,10 +80,10 @@ $outlets = readOutlets($conn);
     Phone: <input type="text" name="tlp" value="<?php if (isset($_GET['edit'])) { echo getOutlet($conn, $_GET['edit'])['tlp']; } ?>" required><br>
     <?php if (isset($_GET['edit'])): ?>
         <input type="submit" name="update" value="Update Outlet">
-        <a href="outlet_crud.php"><button type="button">Clear</button></a> <!-- Clear button -->
+        <a href="outlet.php"><button type="button">Clear</button></a> <!-- Clear button -->
     <?php else: ?>
         <input type="submit" name="create" value="Add Outlet">
-        <a href="outlet_crud.php"><button type="button">Clear</button></a> <!-- Clear button -->
+        <a href="outlet.php"><button type="button">Clear</button></a> <!-- Clear button -->
     <?php endif; ?>
 </form>
 
