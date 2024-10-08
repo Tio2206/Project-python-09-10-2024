@@ -4,6 +4,7 @@ session_start();
 
 include "../conn.php";
 include "../css/sidebar.php";
+
 // Insert New Transaction
 if (isset($_POST['submit'])) {
     $id_outlet = $_POST['id_outlet'];
@@ -19,7 +20,7 @@ if (isset($_POST['submit'])) {
 
     // Insert into tb_transaksi
     $query = "INSERT INTO tb_transaksi (id_outlet, kode_invoice, id_member, tgl, batas_waktu, biaya_tambahan, diskon, pajak, status, dibayar, id_user) 
-              VALUES ('$id_outlet', '$kode_invoice', '$id_member', '$tgl', '$batas_waktu', '$biaya_tambahan', '$diskon', '$pajak', '$status', '$dibayar', '$_SESSION[user_id]')";
+              VALUES ('$id_outlet', '$kode_invoice', '$id_member', '$tgl', '$batas_waktu', '$biaya_tambahan', '$diskon', '$pajak', '$status', '$dibayar', '$_SESSION[id_user]')";
 
     if (mysqli_query($conn, $query)) {
         $id_transaksi = mysqli_insert_id($conn); // Get the last inserted transaction ID
@@ -53,6 +54,17 @@ if (isset($_POST['pay'])) {
     echo "Transaction has been marked as paid.";
 }
 
+// Update Transaction Status
+if (isset($_POST['update_status'])) {
+    $id_transaksi = $_POST['id_transaksi'];
+    $new_status = $_POST['status']; // Get new status from dropdown
+
+    $query = "UPDATE tb_transaksi SET status = '$new_status' WHERE id = '$id_transaksi'";
+    mysqli_query($conn, $query);
+    
+    echo "Transaction status updated to $new_status.";
+}
+
 // Delete Transaction and Its Details
 if (isset($_POST['delete'])) {
     $id_transaksi = $_POST['id_transaksi'];
@@ -73,7 +85,6 @@ if (isset($_POST['delete'])) {
 <html>
 <head>
     <title>Transaction Management</title>
-    <link rel="stylesheet" href="../css/transaksi.css">
 </head>
 <body>
 
@@ -108,7 +119,7 @@ if (isset($_POST['delete'])) {
     </select>
 
     <label>Batas Waktu:</label>
-    <input type="date" name="batas_waktu">
+    <input type="date" name="batas_waktu"> <!-- Changed to date input type -->
 
     <label>Additional Cost:</label>
     <input type="number" name="biaya_tambahan">
@@ -185,6 +196,16 @@ if (isset($_POST['delete'])) {
         echo "<td>
                 <form method='POST' action=''>
                     <input type='hidden' name='id_transaksi' value='{$row['id']}'>
+                    
+                    <!-- Dropdown to edit status -->
+                    <select name='status'>
+                        <option value='baru' " . ($row['status'] == 'baru' ? 'selected' : '') . ">Baru</option>
+                        <option value='proses' " . ($row['status'] == 'proses' ? 'selected' : '') . ">Proses</option>
+                        <option value='selesai' " . ($row['status'] == 'selesai' ? 'selected' : '') . ">Selesai</option>
+                        <option value='diambil' " . ($row['status'] == 'diambil' ? 'selected' : '') . ">Diambil</option>
+                    </select>
+
+                    <input type='submit' name='update_status' value='Update Status'>
                     <input type='submit' name='pay' value='Mark as Paid'>
                     <input type='submit' name='delete' value='Delete'>
                 </form>
