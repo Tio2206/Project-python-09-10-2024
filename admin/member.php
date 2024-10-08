@@ -64,10 +64,10 @@ if (isset($_GET['delete'])) {
 $members = readMembers($conn);
 ?>
 
-
+<!-- HTML form for creating or updating members -->
 <h2>Member Form</h2>
 <form method="post" action="">
-    <input type="hidden" name="id" value="<?php if (isset($_GET['edit'])) { echo $_GET['edit']; } ?>">
+    <input type="hidden" name="id_member" value="<?php if (isset($_GET['edit'])) { echo $_GET['edit']; } ?>">
     Name: <input type="text" name="nama" value="<?php if (isset($_GET['edit'])) { echo getMember($conn, $_GET['edit'])['nama']; } ?>" required><br>
     Address: <input type="text" name="alamat" value="<?php if (isset($_GET['edit'])) { echo getMember($conn, $_GET['edit'])['alamat']; } ?>" required><br>
     Gender: 
@@ -78,11 +78,12 @@ $members = readMembers($conn);
     Phone: <input type="text" name="tlp" value="<?php if (isset($_GET['edit'])) { echo getMember($conn, $_GET['edit'])['tlp']; } ?>" required><br>
     <?php if (isset($_GET['edit'])): ?>
         <input type="submit" name="update" value="Update Member">
+        <a href="member.php"><button type="button">Clear</button></a> <!-- Clear button -->
     <?php else: ?>
         <input type="submit" name="create" value="Add Member">
+        <a href="member.php"><button type="button">Clear</button></a> <!-- Clear button -->
     <?php endif; ?>
 </form>
-
 
 <h2>Member List</h2>
 <table border="1">
