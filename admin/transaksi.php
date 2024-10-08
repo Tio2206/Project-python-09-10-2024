@@ -20,7 +20,7 @@ if (isset($_POST['submit'])) {
 
     // Insert into tb_transaksi
     $query = "INSERT INTO tb_transaksi (id_outlet, kode_invoice, id_member, tgl, batas_waktu, biaya_tambahan, diskon, pajak, status, dibayar, id_user) 
-              VALUES ('$id_outlet', '$kode_invoice', '$id_member', '$tgl', '$batas_waktu', '$biaya_tambahan', '$diskon', '$pajak', '$status', '$dibayar', '$_SESSION[id_user]')";
+              VALUES ('$id_outlet', '$kode_invoice', '$id_member', '$tgl', '$batas_waktu', '$biaya_tambahan', '$diskon', '$pajak', '$status', '$dibayar', '$_SESSION[user_id]')";
 
     if (mysqli_query($conn, $query)) {
         $id_transaksi = mysqli_insert_id($conn); // Get the last inserted transaction ID
