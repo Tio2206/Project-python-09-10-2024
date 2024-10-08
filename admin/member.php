@@ -1,37 +1,37 @@
 <?php
 include "../conn.php";
 
-// Function to create a member
+
 function createMember($conn, $nama, $alamat, $jenis_kelamin, $tlp) {
     $sql = "INSERT INTO tb_member (nama, alamat, jenis_kelamin, tlp) VALUES ('$nama', '$alamat', '$jenis_kelamin', '$tlp')";
     return $conn->query($sql);
 }
 
-// Function to read all members
+
 function readMembers($conn) {
     $sql = "SELECT * FROM tb_member";
     return $conn->query($sql);
 }
 
-// Function to get a single member's details
+
 function getMember($conn, $id) {
     $sql = "SELECT * FROM tb_member WHERE id = '$id'";
     return $conn->query($sql)->fetch_assoc();
 }
 
-// Function to update a member
+
 function updateMember($conn, $id, $nama, $alamat, $jenis_kelamin, $tlp) {
     $sql = "UPDATE tb_member SET nama = '$nama', alamat = '$alamat', jenis_kelamin = '$jenis_kelamin', tlp = '$tlp' WHERE id = '$id'";
     return $conn->query($sql);
 }
 
-// Function to delete a member
+
 function deleteMember($conn, $id) {
     $sql = "DELETE FROM tb_member WHERE id = '$id'";
     return $conn->query($sql);
 }
 
-// Handle Create, Update, Delete operations based on form submission
+
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     if (isset($_POST['create'])) {
         $nama = $_POST['nama'];
@@ -60,11 +60,11 @@ if (isset($_GET['delete'])) {
     }
 }
 
-// Display all members (Read)
+
 $members = readMembers($conn);
 ?>
 
-<!-- HTML form for creating or updating members -->
+
 <h2>Member Form</h2>
 <form method="post" action="">
     <input type="hidden" name="id" value="<?php if (isset($_GET['edit'])) { echo $_GET['edit']; } ?>">
@@ -83,7 +83,7 @@ $members = readMembers($conn);
     <?php endif; ?>
 </form>
 
-<!-- Display list of members -->
+
 <h2>Member List</h2>
 <table border="1">
     <tr>
