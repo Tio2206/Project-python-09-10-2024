@@ -10,7 +10,7 @@ if (isset($_POST['submit'])) {
     $kode_invoice = $_POST['kode_invoice'];
     $id_member = $_POST['id_member'];
     $tgl = date('Y-m-d');
-    $batas_waktu = $_POST['batas_waktu'];
+    $batas_waktu = $_POST['batas_waktu']; // Adding batas_waktu field
     $biaya_tambahan = $_POST['biaya_tambahan'];
     $diskon = $_POST['diskon'];
     $pajak = $_POST['pajak'];
@@ -19,7 +19,7 @@ if (isset($_POST['submit'])) {
 
     // Insert into tb_transaksi
     $query = "INSERT INTO tb_transaksi (id_outlet, kode_invoice, id_member, tgl, batas_waktu, biaya_tambahan, diskon, pajak, status, dibayar, id_user) 
-              VALUES ('$id_outlet', '$kode_invoice', '$id_member', '$tgl', '$batas_waktu', '$biaya_tambahan', '$diskon', '$pajak', '$status', '$dibayar', '$_SESSION[id_user]')";
+              VALUES ('$id_outlet', '$kode_invoice', '$id_member', '$tgl', '$batas_waktu', '$biaya_tambahan', '$diskon', '$pajak', '$status', '$dibayar', '$_SESSION[user_id]')";
 
     if (mysqli_query($conn, $query)) {
         $id_transaksi = mysqli_insert_id($conn); // Get the last inserted transaction ID
@@ -106,6 +106,9 @@ if (isset($_POST['delete'])) {
         ?>
     </select>
 
+    <label>Batas Waktu:</label>
+    <input type="date" name="batas_waktu">
+
     <label>Additional Cost:</label>
     <input type="number" name="biaya_tambahan">
 
@@ -148,6 +151,7 @@ if (isset($_POST['delete'])) {
         <th>Member</th>
         <th>Outlet</th>
         <th>Date</th>
+        <th>Batas Waktu</th> <!-- Adding batas waktu to the table -->
         <th>Status</th>
         <th>Paid</th>
         <th>Total Price</th>
@@ -173,6 +177,7 @@ if (isset($_POST['delete'])) {
         echo "<td>" . $row['member_name'] . "</td>";
         echo "<td>" . $row['outlet_name'] . "</td>";
         echo "<td>" . $row['tgl'] . "</td>";
+        echo "<td>" . $row['batas_waktu'] . "</td>"; // Display batas waktu
         echo "<td>" . $row['status'] . "</td>";
         echo "<td>" . $row['dibayar'] . "</td>";
         echo "<td>" . $row['total_price'] . "</td>";
