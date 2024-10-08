@@ -1,6 +1,6 @@
 <?php
 include "../conn.php";
-include "../css/sidebar.php";
+include "../css/sidebarkasir.php";
 
 function createMember($conn, $nama, $alamat, $jenis_kelamin, $tlp) {
     $sql = "INSERT INTO tb_member (nama, alamat, jenis_kelamin, tlp) VALUES ('$nama', '$alamat', '$jenis_kelamin', '$tlp')";

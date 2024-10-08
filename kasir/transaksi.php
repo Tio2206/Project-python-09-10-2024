@@ -3,7 +3,7 @@
 session_start();
 
 include "../conn.php";
-include "../css/sidebar.php";
+include "../css/sidebarkasir.php";
 
 // Insert New Transaction
 if (isset($_POST['submit'])) {
