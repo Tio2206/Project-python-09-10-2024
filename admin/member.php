@@ -64,12 +64,12 @@ $members = readMembers($conn);
 <body>
 <h2>Data Pelanggan</h2>
 
-<!-- Tambah Member Button -->
+
 <div class="action-buttons">
     <button id="show-form-btn" class="add-member-btn">Tambah Pelanggan</button>
 </div>
 
-<!-- Hidden Member Form -->
+
 <div id="member-form" class="member-form" style="display: none;">
     <form method="post" action="">
         <input type="hidden" name="id_member" value="<?php if (isset($_GET['edit'])) { echo $_GET['edit']; } ?>">
@@ -82,10 +82,10 @@ $members = readMembers($conn);
         </select><br>
         Nomor Telphone: <input type="text" name="tlp" value="<?php if (isset($_GET['edit'])) { echo getMember($conn, $_GET['edit'])['tlp']; } ?>" required><br>
         <?php if (isset($_GET['edit'])): ?>
-            <input type="submit" name="update" value="Update Member">
+            <input type="submit" name="update" value="Update Member" class="reset">
             <a href="member.php"><button type="button">Reset</button></a> <!-- Clear button -->
         <?php else: ?>
-            <input type="submit" name="create" value="Add Member">
+            <input type="submit" name="create" value="Add Member" class="reset">
             <a href="member.php"><button type="button">Reset</button></a> <!-- Clear button -->
         <?php endif; ?>
     </form>

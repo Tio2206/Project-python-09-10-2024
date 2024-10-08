@@ -1,5 +1,5 @@
 <?php
-// Database connection
+
 $host = 'localhost';
 $user = 'root';
 $password = '';
@@ -11,37 +11,36 @@ if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
 
-// Function to create an outlet
+
 function createOutlet($conn, $nama, $alamat, $tlp) {
     $sql = "INSERT INTO tb_outlet (nama, alamat, tlp) VALUES ('$nama', '$alamat', '$tlp')";
     return $conn->query($sql);
 }
 
-// Function to read all outlets
+
 function readOutlets($conn) {
     $sql = "SELECT * FROM tb_outlet";
     return $conn->query($sql);
 }
 
-// Function to get a single outlet's details
+
 function getOutlet($conn, $id) {
     $sql = "SELECT * FROM tb_outlet WHERE id = '$id'";
     return $conn->query($sql)->fetch_assoc();
 }
 
-// Function to update an outlet
+
 function updateOutlet($conn, $id, $nama, $alamat, $tlp) {
     $sql = "UPDATE tb_outlet SET nama = '$nama', alamat = '$alamat', tlp = '$tlp' WHERE id = '$id'";
     return $conn->query($sql);
 }
 
-// Function to delete an outlet
+
 function deleteOutlet($conn, $id) {
     $sql = "DELETE FROM tb_outlet WHERE id = '$id'";
     return $conn->query($sql);
 }
 
-// Handle Create, Update, Delete operations based on form submission
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     if (isset($_POST['create'])) {
         $nama = $_POST['nama'];
@@ -68,23 +67,23 @@ if (isset($_GET['delete'])) {
     }
 }
 
-// Display all outlets (Read)
+
 $outlets = readOutlets($conn);
 ?>
 
-<!-- HTML form for creating or updating outlets -->
+
 <head>
-    <link rel="stylesheet" href="../css/outlet.css"> <!-- Link to CSS file -->
+    <link rel="stylesheet" href="../css/outlet.css"> 
 </head>
 <body>
 <h2>Outlet List</h2>
 
-<!-- Add Outlet Button -->
+
 <div class="action-buttons">
     <button id="show-form-btn" class="add-outlet-btn">Tambah Outlet</button>
 </div>
 
-<!-- Hidden Outlet Form -->
+
 <div id="outlet-form" class="outlet-form" style="display: none;">
     <form method="post" action="">
         <input type="hidden" name="id" value="<?php if (isset($_GET['edit'])) { echo $_GET['edit']; } ?>">
@@ -93,15 +92,15 @@ $outlets = readOutlets($conn);
         Phone: <input type="text" name="tlp" value="<?php if (isset($_GET['edit'])) { echo getOutlet($conn, $_GET['edit'])['tlp']; } ?>" required><br>
         <?php if (isset($_GET['edit'])): ?>
             <input type="submit" name="update" value="Update Outlet">
-            <a href="outlet.php"><button type="button">Clear</button></a> <!-- Clear button -->
+            <a href="outlet.php"><button type="button">Clear</button></a> 
         <?php else: ?>
             <input type="submit" name="create" value="Add Outlet">
-            <a href="outlet.php"><button type="button">Clear</button></a> <!-- Clear button -->
+            <a href="outlet.php"><button type="button">Clear</button></a> 
         <?php endif; ?>
     </form>
 </div>
 
-<!-- Display list of outlets -->
+
 <h2>Outlet List</h2>
 <table border="1">
     <tr>

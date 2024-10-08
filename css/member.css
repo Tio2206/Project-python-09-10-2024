@@ -22,7 +22,7 @@ body {
 }
 
 
-.add-member-btn {
+button {
     background-color: #2a9d8f;
     color: white;
     padding: 10px 20px;
@@ -32,6 +32,7 @@ body {
     border: none;
     font-size: 16px;
 }
+
 
 .add-member-btn:hover {
     background-color: #21867a;
@@ -57,6 +58,17 @@ body {
 }
 
 .member-form input[type="submit"] {
+    background-color: #2a9d8f;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+}
+
+.member-form input[type="button"] {
     background-color: #2a9d8f;
     color: white;
     padding: 10px 20px;

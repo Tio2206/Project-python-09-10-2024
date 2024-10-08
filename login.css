@@ -1,0 +1,49 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f0f0f0; /* Latar belakang abu-abu muda */
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh; /* Mengisi seluruh tinggi viewport */
+}
+
+form {
+    background-color: #fff; /* Latar belakang putih untuk formulir */
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Bayangan halus */
+    padding: 20px;
+    width: 300px; /* Lebar formulir */
+}
+
+table {
+    width: 100%;
+}
+
+td {
+    padding: 10px;
+}
+
+input[type="text"],
+input[type="password"] {
+    width: 100%; /* Memenuhi lebar sel */
+    padding: 10px;
+    border: 1px solid #ccc; /* Garis batas abu-abu */
+    border-radius: 4px;
+    box-sizing: border-box; /* Menghitung padding dalam lebar */
+}
+
+input[type="submit"] {
+    background-color: #007bff; /* Warna biru untuk tombol */
+    color: white; /* Teks putih */
+    border: none;
+    border-radius: 4px;
+    padding: 10px;
+    cursor: pointer; /* Pointer saat hover */
+    transition: background-color 0.3s; /* Transisi untuk efek hover */
+}
+
+input[type="submit"]:hover {
+    background-color: #0056b3; /* Warna lebih gelap saat hover */
+}

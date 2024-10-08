@@ -110,15 +110,15 @@ $outlets = getOutlets($conn); // Fetching outlets for the dropdown
         
         <?php if (isset($_GET['edit'])): ?>
             <input type="submit" name="update" value="Update Package">
-            <a href="paket.php"><button type="button">Clear</button></a> <!-- Clear button -->
+            <a href="paket.php"><button type="button">Clear</button></a> 
         <?php else: ?>
             <input type="submit" name="create" value="Add Package">
-            <a href="paket.php"><button type="button">Clear</button></a> <!-- Clear button -->
+            <a href="paket.php"><button type="button">Clear</button></a> 
         <?php endif; ?>
     </form>
 </div>
 
-<!-- Display list of packages -->
+
 <h2>Package List</h2>
 <table border="1">
     <tr>
