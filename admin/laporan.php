@@ -2,6 +2,8 @@
 // Start the session and connect to the database
 session_start();
 $conn = mysqli_connect("localhost", "root", "", "laundry_db");
+include "../css/sidebar.php";
+
 
 if (!$conn) {
     die("Connection failed: " . mysqli_connect_error());
@@ -14,6 +16,7 @@ if (!$conn) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Generate Laporan</title>
+    <link rel="stylesheet" href="../css/laporan.css">
     <style>
         table {
             width: 100%;
