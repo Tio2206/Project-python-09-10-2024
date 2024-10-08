@@ -84,16 +84,16 @@ if (isset($_POST['delete'])) {
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Transaction Management</title>
+    <title>Transaksi</title>
+    <link rel="stylesheet" href="../css/transaksi.css">
 </head>
 <body>
 
-<!-- Add New Transaction Form -->
-<h2>Add New Transaction</h2>
+
+<h2>Tambah Data Transaksi</h2>
 <form method="POST" action="">
     <label>Outlet:</label>
     <select name="id_outlet">
-        <!-- Populate options from tb_outlet -->
         <?php
         $outlet_query = "SELECT * FROM tb_outlet";
         $outlet_result = mysqli_query($conn, $outlet_query);
@@ -103,12 +103,12 @@ if (isset($_POST['delete'])) {
         ?>
     </select>
 
-    <label>Invoice Code:</label>
+    <label>Nomor pemesanan:</label>
     <input type="text" name="kode_invoice">
 
-    <label>Member:</label>
+    <label>Pelanggan:</label>
     <select name="id_member">
-        <!-- Populate options from tb_member -->
+
         <?php
         $member_query = "SELECT * FROM tb_member";
         $member_result = mysqli_query($conn, $member_query);
@@ -119,20 +119,20 @@ if (isset($_POST['delete'])) {
     </select>
 
     <label>Batas Waktu:</label>
-    <input type="date" name="batas_waktu"> <!-- Changed to date input type -->
+    <input type="date" name="batas_waktu"> 
 
-    <label>Additional Cost:</label>
+    <label>Biaya Tambahan:</label>
     <input type="number" name="biaya_tambahan">
 
-    <label>Discount:</label>
+    <label>Diskon</label>
     <input type="number" name="diskon">
 
-    <label>Tax:</label>
+    <label>Pajak</label>
     <input type="number" name="pajak">
 
     <!-- Items/Packages for this transaction -->
     <div id="package-items">
-        <label>Package:</label>
+        <label>Paket</label>
         <select name="id_paket[]">
             <!-- Populate options from tb_paket -->
             <?php
@@ -144,34 +144,31 @@ if (isset($_POST['delete'])) {
             ?>
         </select>
 
-        <label>Quantity:</label>
+        <label>Jumlah</label>
         <input type="number" name="qty[]">
     </div>
-
-    <button type="button" id="add-item">Add Another Item</button>
-
     <input type="submit" name="submit" value="Submit">
 </form>
 
 <hr>
 
 <!-- Display Transactions -->
-<h2>Transactions List</h2>
+<h2>List data Transaksi</h2>
 <table border="1">
     <tr>
-        <th>Invoice Code</th>
-        <th>Member</th>
+        <th>Nomor Pemesanan</th>
+        <th>Pelanggan</th>
         <th>Outlet</th>
-        <th>Date</th>
-        <th>Batas Waktu</th> <!-- Adding batas waktu to the table -->
+        <th>Tanggal</th>
+        <th>Batas Waktu</th> 
         <th>Status</th>
-        <th>Paid</th>
-        <th>Total Price</th>
-        <th>Actions</th>
+        <th>Pembayaran</th>
+        <th>Total Harga</th>
+        <th>Aksi</th>
     </tr>
 
     <?php
-    // Fetch transaction with total price
+ 
     $query = "
         SELECT t.*, m.nama AS member_name, o.nama AS outlet_name, SUM(d.qty * p.harga) AS total_price
         FROM tb_transaksi t
@@ -189,7 +186,7 @@ if (isset($_POST['delete'])) {
         echo "<td>" . $row['member_name'] . "</td>";
         echo "<td>" . $row['outlet_name'] . "</td>";
         echo "<td>" . $row['tgl'] . "</td>";
-        echo "<td>" . $row['batas_waktu'] . "</td>"; // Display batas waktu
+        echo "<td>" . $row['batas_waktu'] . "</td>"; 
         echo "<td>" . $row['status'] . "</td>";
         echo "<td>" . $row['dibayar'] . "</td>";
         echo "<td>" . $row['total_price'] . "</td>";
