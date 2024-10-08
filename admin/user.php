@@ -110,7 +110,7 @@ $outlets = getOutlets($conn);
         Role: 
         <select name="role" required>
             <option value="admin" <?php if (isset($_GET['edit']) && getUser($conn, $_GET['edit'])['role'] == 'admin') echo 'selected'; ?>>Admin</option>
-            <option value="cashier" <?php if (isset($_GET['edit']) && getUser($conn, $_GET['edit'])['role'] == 'cashier') echo 'selected'; ?>>Cashier</option>
+            <option value="kasir" <?php if (isset($_GET['edit']) && getUser($conn, $_GET['edit'])['role'] == 'kasir') echo 'selected'; ?>>Cashier</option>
             <option value="owner" <?php if (isset($_GET['edit']) && getUser($conn, $_GET['edit'])['role'] == 'owner') echo 'selected'; ?>>Owner</option>
         </select><br>
         
