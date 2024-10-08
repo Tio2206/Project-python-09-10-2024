@@ -1,5 +1,6 @@
 <?php
 include "../conn.php";
+include("../css/sidebar.php");
 
 // Function to create a user
 function createUser($conn, $id_outlet, $nama, $username, $password, $role) {
@@ -77,41 +78,51 @@ $users = readUsers($conn);
 $outlets = getOutlets($conn); // Fetching outlets for the dropdown
 ?>
 
-<!-- HTML form for creating or updating users -->
-<h2>User Form</h2>
-<form method="post" action="">
-    <input type="hidden" name="id" value="<?php if (isset($_GET['edit'])) { echo $_GET['edit']; } ?>">
-    
-    Outlet:
-    <select name="id_outlet" required>
-        <?php while ($outlet = $outlets->fetch_assoc()): ?>
-            <option value="<?php echo $outlet['id']; ?>" 
-                <?php if (isset($_GET['edit']) && getUser($conn, $_GET['edit'])['id_outlet'] == $outlet['id']) echo 'selected'; ?>>
-                <?php echo $outlet['nama']; ?>
-            </option>
-        <?php endwhile; ?>
-    </select><br>
+<head>
+    <link rel="stylesheet" href="../css/user.css">
+</head>
+<body>
+<h2>User Management</h2>
 
-    Name: <input type="text" name="nama" value="<?php if (isset($_GET['edit'])) { echo getUser($conn, $_GET['edit'])['nama']; } ?>" required><br>
-    Username: <input type="text" name="username" value="<?php if (isset($_GET['edit'])) { echo getUser($conn, $_GET['edit'])['username']; } ?>" required><br>
-    
-    Password: <input type="password" name="password" placeholder="Leave blank to keep the same"><br>
+<div class="action-buttons">
+    <button id="show-form-btn" class="add-user-btn">Add User</button>
+</div>
 
-    Role: 
-    <select name="role" required>
-        <option value="admin" <?php if (isset($_GET['edit']) && getUser($conn, $_GET['edit'])['role'] == 'admin') echo 'selected'; ?>>Admin</option>
-        <option value="cashier" <?php if (isset($_GET['edit']) && getUser($conn, $_GET['edit'])['role'] == 'cashier') echo 'selected'; ?>>Cashier</option>
-        <option value="owner" <?php if (isset($_GET['edit']) && getUser($conn, $_GET['edit'])['role'] == 'owner') echo 'selected'; ?>>Owner</option>
-    </select><br>
-    
-    <?php if (isset($_GET['edit'])): ?>
-        <input type="submit" name="update" value="Update User">
-        <a href="user.php"><button type="button">Clear</button></a> <!-- Clear button -->
-    <?php else: ?>
-        <input type="submit" name="create" value="Add User">
-        <a href="user.php"><button type="button">Clear</button></a> <!-- Clear button -->
-    <?php endif; ?>
-</form>
+<div id="user-form" class="user-form" style="display: none;">
+    <form method="post" action="">
+        <input type="hidden" name="id" value="<?php if (isset($_GET['edit'])) { echo $_GET['edit']; } ?>">
+        
+        Outlet:
+        <select name="id_outlet" required>
+            <?php while ($outlet = $outlets->fetch_assoc()): ?>
+                <option value="<?php echo $outlet['id']; ?>" 
+                    <?php if (isset($_GET['edit']) && getUser($conn, $_GET['edit'])['id_outlet'] == $outlet['id']) echo 'selected'; ?>>
+                    <?php echo $outlet['nama']; ?>
+                </option>
+            <?php endwhile; ?>
+        </select><br>
+
+        Name: <input type="text" name="nama" value="<?php if (isset($_GET['edit'])) { echo getUser($conn, $_GET['edit'])['nama']; } ?>" required><br>
+        Username: <input type="text" name="username" value="<?php if (isset($_GET['edit'])) { echo getUser($conn, $_GET['edit'])['username']; } ?>" required><br>
+        
+        Password: <input type="password" name="password" placeholder="Leave blank to keep the same"><br>
+
+        Role: 
+        <select name="role" required>
+            <option value="admin" <?php if (isset($_GET['edit']) && getUser($conn, $_GET['edit'])['role'] == 'admin') echo 'selected'; ?>>Admin</option>
+            <option value="cashier" <?php if (isset($_GET['edit']) && getUser($conn, $_GET['edit'])['role'] == 'cashier') echo 'selected'; ?>>Cashier</option>
+            <option value="owner" <?php if (isset($_GET['edit']) && getUser($conn, $_GET['edit'])['role'] == 'owner') echo 'selected'; ?>>Owner</option>
+        </select><br>
+        
+        <?php if (isset($_GET['edit'])): ?>
+            <input type="submit" name="update" value="Update User">
+            <a href="user.php"><button type="button">Clear</button></a> <!-- Clear button -->
+        <?php else: ?>
+            <input type="submit" name="create" value="Add User">
+            <a href="user.php"><button type="button">Clear</button></a> <!-- Clear button -->
+        <?php endif; ?>
+    </form>
+</div>
 
 <!-- Display list of users -->
 <h2>User List</h2>
@@ -138,3 +149,11 @@ $outlets = getOutlets($conn); // Fetching outlets for the dropdown
     </tr>
     <?php endwhile; ?>
 </table>
+
+<script>
+    document.getElementById('show-form-btn').addEventListener('click', function() {
+        var form = document.getElementById('user-form');
+        form.style.display = (form.style.display === 'none') ? 'block' : 'none';
+    });
+</script>
+</body>
