@@ -64,18 +64,22 @@ if (isset($_GET['delete'])) {
 $members = readMembers($conn);
 ?>
 
-<!-- HTML form for creating or updating members -->
+<head>
+<link rel="stylesheet" href="../css/member.css">
+</head>
+<body>
 <h2>Member Form</h2>
+<link rel="stylesheet" href="member.css">
 <form method="post" action="">
     <input type="hidden" name="id_member" value="<?php if (isset($_GET['edit'])) { echo $_GET['edit']; } ?>">
-    Name: <input type="text" name="nama" value="<?php if (isset($_GET['edit'])) { echo getMember($conn, $_GET['edit'])['nama']; } ?>" required><br>
-    Address: <input type="text" name="alamat" value="<?php if (isset($_GET['edit'])) { echo getMember($conn, $_GET['edit'])['alamat']; } ?>" required><br>
-    Gender: 
+    Nama: <input type="text" name="nama" value="<?php if (isset($_GET['edit'])) { echo getMember($conn, $_GET['edit'])['nama']; } ?>" required><br>
+    Alamat: <input type="text" name="alamat" value="<?php if (isset($_GET['edit'])) { echo getMember($conn, $_GET['edit'])['alamat']; } ?>" required><br>
+    Jenis Kelamin: 
     <select name="jenis_kelamin" required>
         <option value="L" <?php if (isset($_GET['edit']) && getMember($conn, $_GET['edit'])['jenis_kelamin'] == 'L') echo 'selected'; ?>>Male</option>
         <option value="P" <?php if (isset($_GET['edit']) && getMember($conn, $_GET['edit'])['jenis_kelamin'] == 'P') echo 'selected'; ?>>Female</option>
     </select><br>
-    Phone: <input type="text" name="tlp" value="<?php if (isset($_GET['edit'])) { echo getMember($conn, $_GET['edit'])['tlp']; } ?>" required><br>
+    Nomor Telphone: <input type="text" name="tlp" value="<?php if (isset($_GET['edit'])) { echo getMember($conn, $_GET['edit'])['tlp']; } ?>" required><br>
     <?php if (isset($_GET['edit'])): ?>
         <input type="submit" name="update" value="Update Member">
         <a href="member.php"><button type="button">Clear</button></a> <!-- Clear button -->
@@ -85,15 +89,15 @@ $members = readMembers($conn);
     <?php endif; ?>
 </form>
 
-<h2>Member List</h2>
+<h2>Daftar Member</h2>
 <table border="1">
     <tr>
         <th>ID</th>
-        <th>Name</th>
-        <th>Address</th>
-        <th>Gender</th>
-        <th>Phone</th>
-        <th>Actions</th>
+        <th>Nama</th>
+        <th>Alamat</th>
+        <th>Jenis Kelamin</th>
+        <th>NO Telp</th>
+        <th>Aksi</th>
     </tr>
     <?php while($row = $members->fetch_assoc()): ?>
     <tr>
@@ -109,3 +113,4 @@ $members = readMembers($conn);
     </tr>
     <?php endwhile; ?>
 </table>
+</body>
