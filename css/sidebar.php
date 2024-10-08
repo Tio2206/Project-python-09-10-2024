@@ -1,7 +1,7 @@
 <!-- sidebar.php -->
-<div id="sidebar" style="width: 250px; height: 100vh; background-color: #333; color: white; position: fixed;">
-    <h2 style="padding: 15px; margin-bottom:25px;">Laundry App</h2>
-    <ul style="list-style-type: none; padding: 0;">
+<div id="sidebar" style="width: 250px; height: 100vh; background-color: #333; color: white; position: fixed; top: 0; left: 0;">
+    <h2 style="padding: 15px; margin: 0;">Laundry App</h2>
+    <ul style="list-style-type: none; padding: 0; margin-top: 25px;">
         <li><a href="index.php" style="display: block; padding: 10px 15px; color: white; text-decoration: none;">Dashboard</a></li>
         <li><a href="member.php" style="display: block; padding: 10px 15px; color: white; text-decoration: none;">Data Pelanggan</a></li>
         <li><a href="outlet.php" style="display: block; padding: 10px 15px; color: white; text-decoration: none;">Data Outlet</a></li>
